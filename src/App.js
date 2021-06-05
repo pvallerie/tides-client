@@ -4,6 +4,7 @@ import React, { Component, Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute'
+import Navigation from './components/Navigation'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 
@@ -24,6 +25,7 @@ class App extends Component {
 
     return (
       <Fragment>
+        <Navigation user={user} />
         <main className="container">
           <Route path='/sign-up' render={() => (
             <SignUp setUser={this.setUser}/>
