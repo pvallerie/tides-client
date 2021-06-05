@@ -25,7 +25,7 @@ class SignUp extends Component {
         event.preventDefault()
 
         signUp(this.state)
-            .then(console.log('signed up!'))
+            .then(res => console.log('NEW USER: ', res.data))
             // call tides-api to set location
             // call tides-api to sign-in
             .catch(error => console.error('ERROR: ', error.message))
