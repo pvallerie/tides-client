@@ -4,6 +4,7 @@ import React, { Component, Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import SignUp from './components/SignUp'
+import SignIn from './components/SignIn'
 
 class App extends Component {
   constructor (props) {
@@ -14,6 +15,7 @@ class App extends Component {
     }
   }
 
+  // Updates user state
   setUser = user => this.setState({ user })
 
   render () {
@@ -24,6 +26,9 @@ class App extends Component {
         <main className="container">
           <Route path='/sign-up' render={() => (
             <SignUp setUser={this.setUser}/>
+          )} />
+          <Route path='/sign-in' render={() => (
+            <SignIn setUser={this.setUser}/>
           )} />
         </main>
       </Fragment>
