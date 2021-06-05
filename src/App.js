@@ -5,8 +5,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import AuthenticatedRoute from './components/AuthenticatedRoute'
 import Navigation from './components/Navigation'
+
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
+
+import Home from './components/Home'
 
 class App extends Component {
   constructor (props) {
@@ -35,6 +38,8 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() =>
           <p>Authenticated Route works!</p>} />
+          <AuthenticatedRoute user={user} path='/home' render={() =>
+            <Home user={user} />} />
         </main>
       </Fragment>
     );
