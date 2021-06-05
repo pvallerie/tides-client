@@ -15,6 +15,8 @@ const Home = props => {
     return (
         <Fragment>
             <p>{user.email}, you've made it home!</p>
+            <p>Next High: {highTide}</p>
+            <p>Next Low: {lowTide}</p>
         </Fragment>
     )
 }

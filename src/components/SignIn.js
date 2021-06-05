@@ -23,15 +23,16 @@ class SignIn extends Component {
     onSignIn = event => {
         event.preventDefault()
 
-        const { setUser } = this.props
+        const { setUser, history } = this.props
 
         signIn(this.state)
-            .then(res => console.log('LOGGED IN:', res.data))
+            .then(res => setUser(res.data.user))
+            .then(() => history.push('/home'))
             .catch(error => console.error('ERROR: ', error.message))
     }
 
     render () {
-        const {email, password } = this.state
+        const { email, password } = this.state
         return (
             <div className="row">
               <div className="col-sm-10 col-md-8 mx-auto mt-5">
