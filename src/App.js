@@ -3,6 +3,7 @@ import './App.css';
 import React, { Component, Fragment } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
+import AuthenticatedRoute from './components/AuthenticatedRoute'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
 
@@ -30,6 +31,8 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn setUser={this.setUser}/>
           )} />
+          <AuthenticatedRoute user={user} path='/sign-out' render={() =>
+          <p>Authenticated Route works!</p>} />
         </main>
       </Fragment>
     );
