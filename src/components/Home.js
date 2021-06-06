@@ -17,7 +17,7 @@ const Home = props => {
                 // extract locations from response
                 const locations = res.data.locations
                 // extract location that user created from locations array
-                const userLocation = locations.find(element => element.owner.id === 1)
+                const userLocation = locations.find(element => element.owner.id === user.id)
                 setLocation(userLocation)
                 return userLocation
             })
@@ -47,29 +47,31 @@ const Home = props => {
                         let low = null
                         const tides = promise.data.extremes
                         // get current date/time (in seconds since unix epox)
-                        const currentTime = `${Date.now()}`
+                        const utcSeconds = tides[0].dt
+                        const date = new Date(utcSeconds)
+                        console.log(`next tide time: ${date}`)
                         // set first tide in tides
                         if (tides[0].type === "High") {
-                            console.log('it is high')
-                            high = tides[0].dt
+                            high = tides[0].date
+                            console.log(tides)
                         } else {
-                            low = tides[0].dt
+                            low = tides[0].date
+                            console.log(tides)
                         }
                         // set second tide in tides
                         if (tides[1].type === "High") {
-                            console.log('it is high')
-                            high = tides[1].dt
+                            high = tides[1].date
                         } else {
-                            low = tides[1].dt
+                            low = tides[1].date
                         }
                         return [high, low]
                     })
+                    // set tides states
                     .then(tides => {
                         setHighTide(tides[0])
                         setLowTide(tides[1])
                     })
             })
-        // set tides states
     }, [])
     
     return (
