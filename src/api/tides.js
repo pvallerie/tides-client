@@ -29,6 +29,16 @@ export const indexLocations = (userData) => {
 }
 
 // Update Location
+export const updateLocation = (id, location, userData) => {
+    return axios({
+        url: apiUrl + '/locations/' + id + '/',
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Token ${userData.token}`
+        },
+        data: { location }
+    })
+}
 
 // // Get Coordinates
 // export const getCoordinates = (openCageUrl) => {

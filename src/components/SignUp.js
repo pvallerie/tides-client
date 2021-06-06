@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { signUp } from '../api/auth'
+import { signUp, signIn } from '../api/auth'
+import { createLocation } from '../api/tides'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -23,9 +24,17 @@ class SignUp extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
+        const { setUser, history } = this.props
+        // const { email, password, passwordConfirmation, location } = this.state
 
         signUp(this.state)
-            .then(res => console.log('NEW USER: ', res.data))
+            .then(() => signIn(this.state))
+            .then(res => {
+              setUser(res.data.user)
+              this.state.token = res.data.user.token
+            })
+            .then(() => createLocation(this.state))
+            .then(() => history.push('/home'))
             .catch(error => console.error('ERROR: ', error.message))
     }
 

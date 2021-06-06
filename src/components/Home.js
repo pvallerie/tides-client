@@ -1,13 +1,14 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { indexLocations, getCoordinates, getTides } from '../api/tides'
+import { indexLocations, getCoordinates, getTides, updateLocation } from '../api/tides'
 import axios from 'axios'
+
+import ChangeLocation from './ChangeLocation'
 
 const Home = props => {
     const { user } = props
-    const [location, setLocation] = useState('')
+    const [location, setLocation] = useState({ name: '' })
     const [highTide, setHighTide] = useState(null)
     const [lowTide, setLowTide] = useState(null)
-
 
     // when page loads
     useEffect(() => {
@@ -15,6 +16,7 @@ const Home = props => {
         indexLocations(user)
             .then(res => {
                 // extract locations from response
+                console.log(res)
                 const locations = res.data.locations
                 // extract location that user created from locations array
                 const userLocation = locations.find(element => element.owner.id === user.id)
@@ -23,6 +25,7 @@ const Home = props => {
             })
             // get location lat/long
             .then(userLocation => {
+                console.log(location)
                 const openCageUrl = `https://api.opencagedata.com/geocode/v1/json?q=${userLocation.name}&key=4c4a96fe14474c8097b3f465760faede&countrycode=us`
                 axios.get(openCageUrl)
                     .then(res => {
@@ -49,14 +52,11 @@ const Home = props => {
                         // get current date/time (in seconds since unix epox)
                         const utcSeconds = tides[0].dt
                         const date = new Date(utcSeconds)
-                        console.log(`next tide time: ${date}`)
                         // set first tide in tides
                         if (tides[0].type === "High") {
                             high = tides[0].date
-                            console.log(tides)
                         } else {
                             low = tides[0].date
-                            console.log(tides)
                         }
                         // set second tide in tides
                         if (tides[1].type === "High") {
@@ -73,12 +73,20 @@ const Home = props => {
                     })
             })
     }, [])
+
+    const changeLocation = (newLocation) => {
+        // update location state
+        setLocation(newLocation)
+        // call api to update location
+        updateLocation(location.id, newLocation, user)
+    }
     
     return (
         <Fragment>
             <p>Location: {location.name}</p>
             <p>Next High: {highTide}</p>
             <p>Next Low: {lowTide}</p>
+            <ChangeLocation changeLocation={changeLocation} location={location} user={user} />
         </Fragment>
     )
 }
