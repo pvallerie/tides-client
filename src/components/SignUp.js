@@ -26,8 +26,6 @@ class SignUp extends Component {
 
         signUp(this.state)
             .then(res => console.log('NEW USER: ', res.data))
-            // call tides-api to set location
-            // call tides-api to sign-in
             .catch(error => console.error('ERROR: ', error.message))
     }
 
