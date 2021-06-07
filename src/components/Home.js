@@ -1,8 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react'
-import { indexLocations, getCoordinates, getTides, updateLocation } from '../api/tides'
+import { indexLocations, updateLocation } from '../api/tides'
 import axios from 'axios'
 
 import ChangeLocation from './ChangeLocation'
+import { setTides } from './SetTides'
 
 const Home = props => {
     const { user } = props
@@ -25,7 +26,6 @@ const Home = props => {
             })
             // get location lat/long
             .then(userLocation => {
-                console.log(location)
                 const openCageUrl = `https://api.opencagedata.com/geocode/v1/json?q=${userLocation.name}&key=4c4a96fe14474c8097b3f465760faede&countrycode=us`
                 axios.get(openCageUrl)
                     .then(res => {
@@ -75,10 +75,18 @@ const Home = props => {
     }, [])
 
     const changeLocation = (newLocation) => {
+        // format location
+        const formatedLocation = location
+        // add updated name to it
+        formatedLocation.name = newLocation
         // update location state
-        setLocation(newLocation)
+        setLocation(formatedLocation)
         // call api to update location
-        updateLocation(location.id, newLocation, user)
+        updateLocation(formatedLocation.id, formatedLocation, user)
+        // get tides and reset page
+        const newTides = setTides(location)
+        setHighTide(newTides[0])
+        setLowTide(newTides[1])
     }
     
     return (
