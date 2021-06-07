@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# tides-client
+Frontend of my Tides app.
+[Link to Tides API](https://github.com/pvallerie/tides-api)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You set your location and it tells you the next high and low tides.
 
-## Available Scripts
+### To use:
+1. While the frontend of this app is deployed to GitHub Pages, it must be run locally until backend is deployed due to CORS configuration.
+1. Start server from link to API above.
+3. Clone down repo.
+4. Install dependencies with `npm install`
+5. Run `npm start` to spin up client locally.
+6. Create an account or login to see the next tidal extremes (high and low).
+7. Change Location functionality is not fully working yet. Soon to come.
+8. Sign out and your location preference will be saved until next login.
 
-In the project directory, you can run:
+### Primary Technologies:
+- JavaScript
+- React
+- Bootstrap
+- GitHub Pages
+- Axios
+- 3rd Party APIs:
+    - [OpenCage GeoCoding](https://opencagedata.com/) - used to translate the name of a city to coordinates.
+    - [WorldTides](https://www.worldtides.info/apidocs) - used to gather tide data based on coordinates.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### To do:
+- App does not currently update the page when ChangeLocation is run. Running into an issue with asynchronicity where function is returning before the new tide values have been calculated.
+- Adjust date/time data so it reflects user's time zone.
+- Add ChangePassword functionality.
+- Feature for users to change the date they receive tides for.
+- Feature for users to store multiple locations.
+- Styling
