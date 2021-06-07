@@ -8,6 +8,7 @@ import Navigation from './components/Navigation'
 
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
+import SignOut from './components/SignOut'
 
 import Home from './components/Home'
 
@@ -22,6 +23,9 @@ class App extends Component {
 
   // Updates user state
   setUser = user => this.setState({ user })
+
+  // Clears user state
+  clearUser = () => this.setState({ user: null })
 
   render () {
     const { user } = this.state
@@ -40,6 +44,9 @@ class App extends Component {
           <p>Authenticated Route works!</p>} />
           <AuthenticatedRoute user={user} path='/home' render={() =>
             <Home user={user} />} />
+          <AuthenticatedRoute user={user} path='/sign-out' render={() => (
+            <SignOut clearUser={this.clearUser} user={user} />
+          )} />
         </main>
       </Fragment>
     );

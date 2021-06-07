@@ -27,3 +27,13 @@ export const signIn = credentials => {
         }
     })
 }
+
+export const signOut = userData => {
+    return axios({
+      url: apiUrl + '/sign-out/',
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Token ${userData.token}`
+      }
+    })
+  }
